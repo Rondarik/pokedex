@@ -10,12 +10,12 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Honk&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="pokemonStyle.css">
+    <link rel="stylesheet" href="overlayStyle.css">
     <script src="script.js"></script>
-    <script src="pokemonScript.js"></script>
+    <script src="overlayScript.js"></script>
 </head>
 
-<body onload="renderPokemonOverview()">
+<body onload="init()">
     <header>
         <div class="header_container">
             <div class="head_logo">
@@ -31,11 +31,45 @@
     </header>
 
     <div class="main_container">
-        <div class="main_content" id="mainContentID"> 
+        <div class="main_content" id="mainContentID">
             <!-- renderPokemonOverview -->
+        </div>
+        <button onclick="getNextPokemonPile()" class="more_content_btn">mehr anzeigen</button>
+    </div>
+
+    <div class="overlay d-none" id="overlayID">
+        <div class="overlay_container">
+            <div id="pokedex">
+                <div class="pokedex_container">
+                    <h1 id="PokemonNameID"> Super Pokémon</h1>
+                    <div class="pokedex_box">                        
+                        <div id="pokeTypesID">
+                            <!-- render content -->
+                        </div>
+                        <div id="pokeID">#xxx</div>
+                    </div>
+                </div>
+            </div>
+            <div class="poke_info">
+                <div id="pokemonImgID"></div>
+                <div class="nav_bar">
+                    <div><b>Pokéman Stats</b></div>
+                    <!-- <div>b </div>
+                <div>c </div>
+                <div>d </div> -->
+                </div>
+                <div id="pokeInfoContent"></div>
+                <div class="swith_pokemon">
+                    <img onclick="prevPokemon()" src="./img/prev_pokemon.png" id="prev_pokemon">
+                    <img onclick="nextPokemon()" src="./img/next_pokemon.png" id="next_pokemon">
+                </div>
+            </div>
         </div>
     </div>
 
+    <footer>
+
+    </footer>
 </body>
 
 </html>
