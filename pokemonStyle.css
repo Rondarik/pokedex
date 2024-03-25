@@ -1,0 +1,99 @@
+body {
+    margin: 0;
+    background-color: #bfbfbf;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+header {
+    height: 100px;
+    width: 100%;
+    background-color: #050506;
+    display: flex;
+    justify-content: center;
+    box-shadow: 0px 3px 6px 0px rgb(248, 131, 53);
+}
+
+header h1 {
+    margin: 0;
+    margin-left: 16px;
+    font-size: 64px;
+    font-family: "Honk", system-ui;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+}
+
+.header_container {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    width: 100%;
+    max-width: 900px;
+}
+
+.head_logo {
+    height: 100%;
+    color: white;
+    display: flex;
+    align-items: center;
+}
+
+.head_logo img {
+    height: 50px;
+}
+
+.search_box {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.search_box input {
+    height: 32px;
+}
+
+.search_box img{
+    height: 34px;
+    background-color: rgb(248, 131, 53);
+    border-radius: 5px;
+}
+
+.main_content{
+    margin: 16px 8px;
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 900px;
+    justify-content: center;
+}
+
+.poke_box{
+    width: 200px;
+    height: 200px;
+    border-radius: 16px;
+    margin: 8px;
+    display: flex;
+    flex-direction: column;
+    color: white;
+    
+    border: 1px solid black;
+}
+
+.poke_box_header{
+    display: flex;
+    justify-content: space-between;
+    margin: 8px;
+}
+
+.poke_box_content{
+    align-self: center;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+.poke_box_content img{
+    height: 80px;
+}

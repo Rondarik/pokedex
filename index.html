@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="./img/pokeball.png" type="image/x-icon">
+    <title>Pokédex</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Honk&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="pokemonStyle.css">
+    <script src="script.js"></script>
+    <script src="pokemonScript.js"></script>
+</head>
+
+<body onload="renderPokemonOverview()">
+    <header>
+        <div class="header_container">
+            <div class="head_logo">
+                <img src="./img/pokeball.png">
+                <h1>Pokédex</h1>
+            </div>
+            <div class="search_box">
+                <input type="text">
+                <img src="./img/search.png">
+            </div>
+            <div></div>
+        </div>
+    </header>
+
+    <div class="main_container">
+        <div class="main_content" id="mainContentID"> 
+            <!-- renderPokemonOverview -->
+        </div>
+    </div>
+
+</body>
+
+</html>
