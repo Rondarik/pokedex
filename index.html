@@ -14,6 +14,8 @@
     <script src="script.js"></script>
     <script src="workWithPokeAPIco.js"></script>
     <script src="searchPokemon.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="chart.js"></script>
 </head>
 
 <body onload="init()" id="bodyID">
@@ -37,7 +39,7 @@
         </div>
         <button onclick="getNextPokemonPile()" class="more_content_btn" id="getMoreBtnID">mehr anzeigen</button>
     </div>
-    
+
     <div class="main_container d-none" id="searchContainerID">
         <div class="main_content" id="searchContentID">
             <!-- renderPokemonOverview -->
@@ -50,7 +52,7 @@
             <div id="pokedex">
                 <div class="pokedex_container">
                     <h1 id="PokemonNameID"> Super Pokémon</h1>
-                    <div class="pokedex_box">                        
+                    <div class="pokedex_box">
                         <div id="pokeTypesID">
                             <!-- render content -->
                         </div>
@@ -61,19 +63,16 @@
             <div class="poke_info">
                 <div class="poke_info_header">
                     <img onclick="prevPokemon()" src="./img/prev_pokemon.png" id="prevPokemon">
-                    <div id="dummyDivLeft"></div>
+                    <div id="dummyDivLeft" class="d-none"></div>
                     <div id="pokemonImgID"></div>
-                    <div id="dummyDiv"></div>
+                    <div id="dummyDivRight" class="d-none"></div>
                     <img onclick="nextPokemon()" src="./img/next_pokemon.png" id="nextPokemon">
                 </div>
                 <div class="nav_bar">
                     <h2>Pokémon Stats</h2>
                 </div>
-                <div id="pokeInfoContent">
-                    <table id="pokeInfoTable"></table>
-                    <!-- render content -->
-                </div>
-                <!-- <div class="more_poke_info"></div> -->
+                <div id="pokeInfoContent"></div>
+                <!-- render content -->
             </div>
         </div>
     </div>

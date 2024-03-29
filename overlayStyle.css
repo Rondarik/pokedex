@@ -98,8 +98,17 @@
     transform: scale(1.5);
 }
 
+#dummyDivLeft, #dummyDivRight{
+    width: 50px;
+}
+
 #pokeInfoContent {
     font-size: 24px;
+}
+
+#PokeStatsChart{
+    height: 300px;
+    margin-bottom: 32px;
 }
 
 .more_poke_info {

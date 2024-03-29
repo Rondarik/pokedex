@@ -2,11 +2,10 @@ const typeColor = ['#A4ACAF', '#D56723', '#3DC7EF', '#B87FC8', '#AB9842', '#8080
 const allTypes = ['normal', 'fighting', 'flying', 'poison', 'ground', 'rock', 'bug', 'ghost', 'steel', 'fire', 'water', 'grass', 'electric', 'psychic', 'ice', 'dragon', 'dark', 'fairy', 'unknown', 'shadow'];
 const countOfPokePile = 24;
 let offsetOfLoadedPokemons = 0;
-
 let allLoadedPokemons = [];
-
 let currentJson = [];
 let currentIndex = 0;
+let pokeStats = [];
 
 async function init() {
     currentJson = allLoadedPokemons;
@@ -32,7 +31,7 @@ async function loadPokemonsByIndex(index) {
     if (ID > 10277) {
         return
     }
-    return await loadPokemonByID(offsetOfLoadedPokemons + (ID)); 
+    return await loadPokemonByID(offsetOfLoadedPokemons + (ID));
 }
 
 function renderPokemonOverview() {
@@ -138,7 +137,7 @@ function doNotClose(event) {
 
 function checkEndOfLoadedPokemonJson(ID) {
     let arraySize = currentJson.length;
-    if (ID === arraySize) {
+    if ( !searchIsAktiv && ID === arraySize) {
         getNextPokemonPile();
     }
 }
@@ -159,6 +158,7 @@ function getMainAttributes(index) {
     setBGColorByType(true, index);
     checkEndOfLoadedPokemonJson(index + 1);
     getPokemonStats(index);
+    renderChart();
 }
 
 function nextPokemon() {
@@ -174,52 +174,37 @@ function prevPokemon() {
 }
 
 function checkButton() {
-    if (currentIndex === 0) {
-        document.getElementById('prevPokemon').classList.add('d-none');
-    } else if (currentIndex === (currentJson.length - 1)) {
-        document.getElementById('nextPokemon').classList.add('d-none');
-    } else {
+    console.log(currentIndex);
+    document.getElementById('prevPokemon').classList.add('d-none');
+    document.getElementById('nextPokemon').classList.add('d-none');
+    document.getElementById('dummyDivLeft').classList.remove('d-none');
+    document.getElementById('dummyDivRight').classList.remove('d-none');
+    if (currentIndex > 0) {
         document.getElementById('prevPokemon').classList.remove('d-none');
-        document.getElementById('nextPokemon').classList.remove('d-none');
+        document.getElementById('dummyDivLeft').classList.add('d-none');
     }
+    if (currentIndex < (currentJson.length - 1)) {
+        document.getElementById('nextPokemon').classList.remove('d-none');
+        document.getElementById('dummyDivRight').classList.add('d-none');
+    } 
 }
 
 function getPokemonStats(ID) {
-    let hp = currentJson[ID].stats[0].base_stat;
-    let atk = currentJson[ID].stats[1].base_stat;
-    let def = currentJson[ID].stats[2].base_stat;
-    let spAtk = currentJson[ID].stats[3].base_stat;
-    let spDef = currentJson[ID].stats[4].base_stat;
-    let speed = currentJson[ID].stats[5].base_stat;
-    rederStatsHTML(hp, atk, def, spAtk, spDef, speed);
+    pokeStats = [];
+    pokeStats.push(currentJson[ID].stats[0].base_stat);
+    pokeStats.push(currentJson[ID].stats[1].base_stat);
+    pokeStats.push(currentJson[ID].stats[2].base_stat);
+    pokeStats.push(currentJson[ID].stats[3].base_stat);
+    pokeStats.push(currentJson[ID].stats[4].base_stat);
+    pokeStats.push(currentJson[ID].stats[5].base_stat);
+    rederStatsHTML();
 }
 
 function rederStatsHTML(hp, atk, def, spAtk, spDef, speed) {
-    let container = document.getElementById('pokeInfoTable');
+    let container = document.getElementById('pokeInfoContent');
     container.innerHTML = /*html*/ `
-        <tr>
-            <td>Hitpoints</td>
-            <td>${hp}</td>
-        </tr>
-        <tr>
-            <td>Attack</td>
-            <td>${atk}</td>
-        </tr>
-        <tr>
-            <td>Defence</td>
-            <td>${def}</td>
-        </tr>
-        <tr>
-            <td>Special-attack</td>
-            <td>${spAtk}</td>
-        </tr>
-        <tr>
-            <td>Special-defence</td>
-            <td>${spDef}</td>
-        </tr>
-        <tr>
-            <td>Speed</td>
-            <td>${speed}</td>
-        </tr>
-    `;
+        <div>
+            <canvas id="PokeStatsChart"></canvas>
+        </div>
+        `;
 }

@@ -1,9 +1,11 @@
 let allLoadedPokemonNames = [];
 let loadedSearchedPokemons = [];
+let searchIsAktiv = false;
 
 // Search Pokemon
 function searchForPokemon() {
     currentJson = loadedSearchedPokemons;
+    searchIsAktiv = true;
     document.getElementById('mainContainerID').classList.add('d-none');
     document.getElementById('searchContainerID').classList.remove('d-none');
     let searchInput = document.getElementById('searchInputID').value.toLowerCase();
@@ -25,6 +27,7 @@ function filterNames() {
 
 function backFromSearch() {
     currentJson = allLoadedPokemons;
+    searchIsAktiv = false;
     document.getElementById('mainContainerID').classList.remove('d-none');
     document.getElementById('searchContainerID').classList.add('d-none');
 }
