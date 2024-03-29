@@ -12,10 +12,11 @@
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="overlayStyle.css">
     <script src="script.js"></script>
-    <script src="overlayScript.js"></script>
+    <script src="workWithPokeAPIco.js"></script>
+    <script src="searchPokemon.js"></script>
 </head>
 
-<body onload="init()">
+<body onload="init()" id="bodyID">
     <header>
         <div class="header_container">
             <div class="head_logo">
@@ -23,22 +24,29 @@
                 <h1>Pokédex</h1>
             </div>
             <div class="search_box">
-                <input type="text">
-                <img src="./img/search.png">
+                <input type="text" id="searchInputID" placeholder="search for name or ID" onkeyup="filterNames()">
+                <img src="./img/search.png" onclick="searchForPokemon()" id="searchBtnID">
             </div>
             <div></div>
         </div>
     </header>
 
-    <div class="main_container">
+    <div class="main_container" id="mainContainerID">
         <div class="main_content" id="mainContentID">
             <!-- renderPokemonOverview -->
         </div>
-        <button onclick="getNextPokemonPile()" class="more_content_btn">mehr anzeigen</button>
+        <button onclick="getNextPokemonPile()" class="more_content_btn" id="getMoreBtnID">mehr anzeigen</button>
+    </div>
+    
+    <div class="main_container d-none" id="searchContainerID">
+        <div class="main_content" id="searchContentID">
+            <!-- renderPokemonOverview -->
+        </div>
+        <button onclick="backFromSearch()" class="more_content_btn" id="backFromSearchBtnID">zurück</button>
     </div>
 
-    <div class="overlay d-none" id="overlayID">
-        <div class="overlay_container">
+    <div class="overlay d-none" id="overlayID" onclick="closeOverlay()">
+        <div class="overlay_container" onclick="doNotClose(event)">
             <div id="pokedex">
                 <div class="pokedex_container">
                     <h1 id="PokemonNameID"> Super Pokémon</h1>
@@ -51,18 +59,21 @@
                 </div>
             </div>
             <div class="poke_info">
-                <div id="pokemonImgID"></div>
+                <div class="poke_info_header">
+                    <img onclick="prevPokemon()" src="./img/prev_pokemon.png" id="prevPokemon">
+                    <div id="dummyDivLeft"></div>
+                    <div id="pokemonImgID"></div>
+                    <div id="dummyDiv"></div>
+                    <img onclick="nextPokemon()" src="./img/next_pokemon.png" id="nextPokemon">
+                </div>
                 <div class="nav_bar">
-                    <div><b>Pokéman Stats</b></div>
-                    <!-- <div>b </div>
-                <div>c </div>
-                <div>d </div> -->
+                    <h2>Pokémon Stats</h2>
                 </div>
-                <div id="pokeInfoContent"></div>
-                <div class="swith_pokemon">
-                    <img onclick="prevPokemon()" src="./img/prev_pokemon.png" id="prev_pokemon">
-                    <img onclick="nextPokemon()" src="./img/next_pokemon.png" id="next_pokemon">
+                <div id="pokeInfoContent">
+                    <table id="pokeInfoTable"></table>
+                    <!-- render content -->
                 </div>
+                <!-- <div class="more_poke_info"></div> -->
             </div>
         </div>
     </div>

@@ -55,12 +55,14 @@ header h1 {
 .search_box input {
     height: 32px;
     border-radius: 8px;
+    font-size: 24px;
 }
 
 .search_box img {
     height: 34px;
     background-color: rgb(248, 131, 53);
     border-radius: 5px;
+    cursor: pointer;
 }
 .main_container{
     display: flex;
@@ -70,26 +72,30 @@ header h1 {
     margin: 16px 8px;
     display: flex;
     flex-wrap: wrap;
-    max-width: 900px;
+    max-width: 1100px;
     justify-content: center;
 }
 
 .poke_box {
-    width: 200px;
+    width: 250px;
     height: 200px;
     border-radius: 16px;
     margin: 8px;
     display: flex;
     flex-direction: column;
     color: white;
-    font-size: 22px;
+    font-size: 24px;
     cursor: pointer;
 }
 
 .poke_box_header {
     display: flex;
     justify-content: space-between;
-    margin: 8px;
+    margin: 24px 12px 0 8px;
+
+}
+#pokeBoxId{
+    font-size: 16px;    
 }
 
 .poke_box_content {
@@ -103,6 +109,10 @@ header h1 {
 
 .poke_box_content img {
     height: 80px;
+}
+
+.poke_box:hover .poke_box_content img{
+    transform: scale(1.5);
 }
 
 .more_content_btn {
@@ -125,4 +135,10 @@ footer{
     width: 100%;
     background-color: #3e3e3e;
     margin-top: auto;
+}
+
+@media (max-width: 600px) {
+    header h1{
+        display: none;
+    }
 }
