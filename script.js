@@ -174,7 +174,6 @@ function prevPokemon() {
 }
 
 function checkButton() {
-    console.log(currentIndex);
     document.getElementById('prevPokemon').classList.add('d-none');
     document.getElementById('nextPokemon').classList.add('d-none');
     document.getElementById('dummyDivLeft').classList.remove('d-none');
@@ -203,8 +202,8 @@ function getPokemonStats(ID) {
 function rederStatsHTML(hp, atk, def, spAtk, spDef, speed) {
     let container = document.getElementById('pokeInfoContent');
     container.innerHTML = /*html*/ `
-        <div>
-            <canvas id="PokeStatsChart"></canvas>
+        <div class="wrapper">
+            <canvas id="PokeStatsChart" class="chart"></canvas>
         </div>
         `;
 }

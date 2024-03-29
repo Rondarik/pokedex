@@ -99,7 +99,8 @@
     transform: scale(1.5);
 }
 
-#dummyDivLeft, #dummyDivRight{
+#dummyDivLeft,
+#dummyDivRight {
     width: 50px;
 }
 
@@ -107,7 +108,7 @@
     font-size: 24px;
 }
 
-#PokeStatsChart{
+#PokeStatsChart {
     height: 300px;
     margin-bottom: 32px;
 }
@@ -118,10 +119,17 @@
     background-color: aquamarine;
 }
 
-#pokeInfoTable{
+#pokeInfoTable {
     margin-bottom: 80px;
 }
 
+.wrapper{
+position: relative; 
+height:40vh;
+max-height: 350px;
+width:80vw;
+max-width: 600px;
+}
 .d-none {
     display: none;
 }

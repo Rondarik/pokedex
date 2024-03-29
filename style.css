@@ -137,8 +137,18 @@ footer{
     margin-top: auto;
 }
 
-@media (max-width: 600px) {
+@media (max-width: 700px) {
     header h1{
+        display: none;
+    }
+}
+
+@media (max-width: 420px) {
+    .search_box input {
+        height: 24px;
+        font-size: 18px;
+    }
+    .head_logo{
         display: none;
     }
 }
