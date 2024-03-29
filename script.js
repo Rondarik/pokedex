@@ -60,7 +60,7 @@ function renderOverviewHTML(index, name, id, img) {
                     <div id="pokeBoxId">#${id}</div>
                 </div>
                 <div class="poke_box_content">
-                    <div class="" id="pokeBoxTypes${index}">
+                    <div id="pokeBoxTypes${index}">
                     </div>
                     <img src="${img}">
                 </div>
