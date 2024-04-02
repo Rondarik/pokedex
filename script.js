@@ -36,10 +36,10 @@ async function loadPokemonsByIndex(index) {
 
 function renderPokemonOverview() {
     let content = document.getElementById('mainContentID');
+    content.innerHTML = '';
     let moreButton = document.getElementById('getMoreBtnID');
-
-    for (let i = 0; i < countOfPokePile; i++) {
-        let index = i + offsetOfLoadedPokemons;
+    for (let i = 0; i < allLoadedPokemons.length; i++) {
+        let index = i;
         let name = allLoadedPokemons[index].name;
         name = firstLetterUppercase(name);
         let img = getPokemonImage(index);
@@ -148,7 +148,6 @@ function getMainAttributes(index) {
     let PokeName = document.getElementById('PokemonNameID');
     let pokeImg = document.getElementById('pokemonImgID');
     let pokeID = document.getElementById('pokeID');
-
     PokeName.innerHTML = name.charAt(0).toUpperCase() + name.slice(1); // first letter uppercase
     pokeID.innerHTML = '#' + (id);
     pokeImg.innerHTML = /*html */ `

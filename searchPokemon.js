@@ -4,19 +4,28 @@ let searchIsAktiv = false;
 
 // Search Pokemon
 function searchForPokemon() {
+    loadedSearchedPokemons = [];
     currentJson = loadedSearchedPokemons;
     searchIsAktiv = true;
     document.getElementById('mainContainerID').classList.add('d-none');
     document.getElementById('searchContainerID').classList.remove('d-none');
-    let searchInput = document.getElementById('searchInputID').value.toLowerCase();
-    document.getElementById('searchInputID').value = '';
     let searchBtn = document.getElementById('searchBtnID');
     searchBtn.style.pointerEvents = 'none'; // stop Button geting more loads from API
+    checkInput();
+    searchBtn.style.pointerEvents = 'all'; // allow Button geting more loads from API
+}
 
-    if (isNaN(searchInput)) {
-        searchPokemonByName(searchInput);
+function checkInput() {
+    let searchInput = document.getElementById('searchInputID').value.toLowerCase();
+    document.getElementById('searchInputID').value = '';
+    if (searchInput !== '') {
+        if (isNaN(searchInput)) {
+            searchPokemonByName(checkStringInput(searchInput));
+        } else {
+            searchPokemonsByID(searchInput);
+        }
     } else {
-        searchPokemonsByID(searchInput);
+        sendError();
     }
 }
 
@@ -25,15 +34,21 @@ function filterNames() {
     searchInput = searchInput.toLowerCase();
 }
 
+function checkStringInput(searchInput) {
+    if (searchInput.length >= 3) {
+        return searchInput;
+    } 
+}
+
 function backFromSearch() {
     currentJson = allLoadedPokemons;
     searchIsAktiv = false;
     document.getElementById('mainContainerID').classList.remove('d-none');
     document.getElementById('searchContainerID').classList.add('d-none');
+    renderPokemonOverview()
 }
 
 async function searchPokemonByName(searchInput) {
-    let searchBtn = document.getElementById('searchBtnID');
     let names = [];
     for (let i = 0; i < allLoadedPokemonNames.results.length; i++) {
         const name = allLoadedPokemonNames.results[i].name.toLowerCase();
@@ -43,7 +58,6 @@ async function searchPokemonByName(searchInput) {
     }
     await getPokemonsByNames(names);
     renderSearchedPokemon();
-    searchBtn.style.pointerEvents = 'all'; // allow Button geting more loads from API
 }
 
 async function getPokemonsByNames(names) {
@@ -53,16 +67,30 @@ async function getPokemonsByNames(names) {
 }
 
 async function searchPokemonsByID(searchInput) {
-    let idsFromUrl = [];
-
-    for (let i = 0; i < allLoadedPokemonNames.results.length; i++) {
-        const id = String(findIdInUrl(allLoadedPokemonNames.results[i].url));
-        if (id.includes(searchInput)) {
-            idsFromUrl.push(Number(id));
-        }
-    }
-    await getPokemonsByIDs(idsFromUrl);
+    if (checkNumberInput(searchInput)) {
+    let id = Number(searchInput)
+    loadedSearchedPokemons.push(await loadPokemonByID(id))
     renderSearchedPokemon();
+   } else {
+    sendError();
+   }
+}
+
+function sendError() {
+    let content = document.getElementById('searchContentID');
+        content.innerHTML = /*html*/ `
+            <div class="error_message">Pokémon not found. Type min 3 Letters or a number between 1-1025 or 10001-10277</div>
+        `;
+}
+
+function checkNumberInput(searchInput) {
+    if (searchInput >=0 && searchInput <=1025) {
+        return true;
+    } if (searchInput >=10001 && searchInput <=10277) {
+        return true;
+    }
+    return false;
+
 }
 
 function findIdInUrl(url) {
@@ -85,6 +113,7 @@ async function getPokemonsByIDs(idsFromUrl) {
 function renderSearchedPokemon() {
     let content = document.getElementById('searchContentID');
     content.innerHTML = '';
+    checkSearchResult();
     for (let i = 0; i < loadedSearchedPokemons.length; i++) {
         let name = loadedSearchedPokemons[i].name;
         name = firstLetterUppercase(name);
@@ -93,6 +122,12 @@ function renderSearchedPokemon() {
         content.innerHTML += renderSearchHTML(i, name, id, img);
         getSearchedPokemonTypes(i);
         setBGColorBySearchedType(i);
+    }
+}
+
+function checkSearchResult() {
+    if (loadedSearchedPokemons.length === 0) {
+        sendError();
     }
 }
 
